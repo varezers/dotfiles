@@ -1,0 +1,174 @@
+####################### VARIABLES
+set $mod            Mod4
+set $bordersize     2
+set $myres          10
+set $foreground     #ebdbb2
+set $background     #32302f
+set $darkgrey       #928374
+set $darkred        #cc241d
+set $red            #fb4934
+set $darkgreen      #98971a
+set $green          #b8bb26
+set $darkyellow     #d79921
+set $yellow         #fabd2f
+set $darkblue       #458588
+set $blue           #83a598
+set $darkmagenta    #b16286
+set $magenta        #d3869b
+set $darkcyan       #689d6a
+set $cyan           #8ec07c
+set $lightgrey      #a89984
+#set $white          #ebdbb2
+
+#######################    STARTUP
+# exec "pulseaudio --start"
+exec "xrdb ~/.Xresources"
+exec "setxkbmap lv -variant apostrophe"
+exec "nitrogen --restore"
+exec "redshift -l 56.949649:24.105186"
+exec  --no-startup-id polybar example
+
+#######################  SETTINGS
+font                    pango:Fira Mono Medium 12
+focus_follows_mouse     no
+popup_during_fullscreen smart
+workspace_layout        default
+#name                   border  background  text    indicator   child_border
+client.focused          $foreground $foreground $background $foreground
+client.focused_inactive $darkgrey $darkgrey $foreground $darkgrey
+client.unfocused        $darkgrey $darkgrey $foreground $darkgrey
+client.urgent           $red $red $background $red
+
+hide_edge_borders       none
+new_float               pixel $bordersize
+new_window              pixel $bordersize
+
+
+#######################  BINDINGS
+bindsym                 Print exec "scrot 'scrot_%m-%d-%Y_%H-%M-%S.png' -q 100 -d 1 -e 'mv $f /tmp/; notify-send -u low 'screenshot taken''";
+bindsym                 $mod+space exec --no-startup-id rofi -show run
+# bindsym                 $mod+space exec rofi -show run -lines 5 -opacity "95" -bw 0 -bc "$black" -bg "$black" -fg "$white" -hlbg "$black" -hlfg "$darkgrey"
+bindsym                 $mod+d exec dmenu_run
+bindsym                 $mod+Return exec urxvt
+bindsym                 $mod+p exec thunar
+bindsym                 $mod+o exec firefox.real -no-remote
+bindsym                 $mod+i exec nm-applet
+
+#######################   i3 BINDINGS
+bindsym                 $mod+Shift+c reload
+bindsym                 $mod+Shift+r restart
+bindsym                 $mod+Shift+q kill
+
+#######################    i3 FOCUS
+bindsym                 $mod+a focus parent
+bindsym                 $mod+j focus left
+bindsym                 $mod+k focus down
+bindsym                 $mod+l focus up
+bindsym                 $mod+semicolon focus right
+
+bindsym                 $mod+Down focus down
+bindsym                 $mod+Up focus up
+bindsym                 $mod+Right focus right
+bindsym                 $mod+Left focus left
+
+bindsym                 $mod+Shift+Tab workspace prev
+bindsym                 $mod+Tab workspace next
+
+bindsym                 $mod+Shift+Left move left
+bindsym                 $mod+Shift+Down move down
+bindsym                 $mod+Shift+Up move up
+bindsym                 $mod+Shift+Right move right
+
+
+bindsym                 $mod+h splith
+bindsym                 $mod+v splitv
+
+bindsym                 $mod+1 workspace 1
+bindsym                 $mod+2 workspace 2
+bindsym                 $mod+3 workspace 3
+bindsym                 $mod+4 workspace 4
+bindsym                 $mod+5 workspace 5
+bindsym                 $mod+6 workspace 6
+bindsym                 $mod+7 workspace 7
+bindsym                 $mod+8 workspace 8
+bindsym                 $mod+9 workspace 9
+bindsym                 $mod+0 workspace 10
+
+bindsym                 $mod+Shift+1 move container to workspace 1
+bindsym                 $mod+Shift+2 move container to workspace 2
+bindsym                 $mod+Shift+3 move container to workspace 3
+bindsym                 $mod+Shift+4 move container to workspace 4
+bindsym                 $mod+Shift+5 move container to workspace 5
+bindsym                 $mod+Shift+6 move container to workspace 6
+bindsym                 $mod+Shift+7 move container to workspace 7
+bindsym                 $mod+Shift+8 move container to workspace 8
+bindsym                 $mod+Shift+9 move container to workspace 9
+bindsym                 $mod+Shift+0 move container to workspace 10
+
+bindsym                 $mod+s layout stacking
+bindsym                 $mod+w layout tabbed
+bindsym                 $mod+e layout toggle split
+bindsym                 $mod+f fullscreen
+
+bindsym		            $mod+Shift+e mode "$mode_system"
+
+
+#######################     RESIZE BINDS
+mode                    "resize" {
+    bindsym             h resize shrink width $myres px or $myres ppt
+    bindsym             j resize grow height $myres px or $myres ppt
+    bindsym             k resize shrink height $myres px or $myres ppt
+    bindsym             l resize grow width $myres px or $myres ppt
+
+    bindsym             Left resize shrink width $myres px or $myres ppt
+    bindsym             Right resize grow width $myres px or $myres ppt
+    bindsym             Down resize grow height $myres px or $myres ppt
+    bindsym             Up resize shrink height $myres px or $myres ppt
+
+    bindsym             Escape mode "default"
+}
+bindsym                 $mod+r mode "resize"
+
+
+#######################    SOUND BINDS
+bindsym		XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
+bindsym		XF86AudioLowerVolume exec pactl set-sink-volume 0 -3%
+
+#######################    BAR
+# exec_always --no-startup-id polybar bar1 &
+#bar {
+#    status_command i3status -c ~/.config/i3/i3blocks.conf
+#    status_command i3status
+#    position top
+#    font pango:Fira Mono Medium 10
+#    separator_symbol "  "
+#    workspace_buttons yes
+#    strip_workspace_numbers yes
+#    binding_mode_indicator yes
+#
+#    colors {
+#        background $background
+#        statusline $foreground
+#        separator $darkgrey
+
+#        focused_workspace  $background $background $foreground
+#        active_workspace   $background $background $foreground
+#        inactive_workspace $background $background $darkgrey
+#        urgent_workspace   $background $background $red
+#    }
+#}
+
+#######################     EXIT
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock -i ~/.config/jakub-rozalski-iron-fields.png -c '$background', mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id i3lock -i ~/.config/jakub-rozalski-iron-fields.png -c '$background' && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id i3lock -i ~/.config/jakub-rozalski-iron-fields.png -c '$background' && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
