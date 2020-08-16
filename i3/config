@@ -18,7 +18,7 @@ set $magenta        #d3869b
 set $darkcyan       #689d6a
 set $cyan           #8ec07c
 set $lightgrey      #a89984
-#set $white          #ebdbb2
+set $white          #ebdbb2
 
 #######################    STARTUP
 # exec "pulseaudio --start"
@@ -33,11 +33,11 @@ font                    pango:Fira Mono Medium 12
 focus_follows_mouse     no
 popup_during_fullscreen smart
 workspace_layout        default
-#name                   border  background  text    indicator   child_border
-client.focused          $foreground $foreground $background $foreground
-client.focused_inactive $darkgrey $darkgrey $foreground $darkgrey
-client.unfocused        $darkgrey $darkgrey $foreground $darkgrey
-client.urgent           $red $red $background $red
+#name                   border		background		text		indicator		child_border
+client.focused          $foreground	$foreground 	$background	$foreground
+client.focused_inactive $darkgrey 	$darkgrey 		$foreground	$darkgrey
+client.unfocused        $darkgrey 	$darkgrey 		$foreground	$darkgrey
+client.urgent           $red $red 	$background 	$red
 
 hide_edge_borders       none
 new_float               pixel $bordersize
